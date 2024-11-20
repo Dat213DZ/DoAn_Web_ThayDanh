@@ -1,0 +1,72 @@
+﻿@model DA_WebBanHang.Models.KhachHang
+
+@{
+    ViewBag.Title = "Đăng ký";
+}
+
+<div class="auth-form">
+    <h2 class="text-center mb-4">Đăng ký tài khoản</h2>
+    @using (Html.BeginForm())
+    {
+        <div class="form-group mb-3">
+            <label class="form-label">Họ tên:</label>
+            <div class="input-group">
+                <span class="input-group-text">
+                    <i class="fas fa-user"></i>
+                </span>
+                @Html.TextBoxFor(m => m.HoTen, new { @class = "form-control", required = "required", placeholder = "Nhập họ tên" })
+            </div>
+        </div>
+        <div class="form-group mb-3">
+            <label class="form-label">Email:</label>
+            <div class="input-group">
+                <span class="input-group-text">
+                    <i class="fas fa-envelope"></i>
+                </span>
+                @Html.TextBoxFor(m => m.Email, new { @class = "form-control", type = "email", required = "required", placeholder = "Nhập email" })
+            </div>
+        </div>
+        <div class="form-group mb-3">
+            <label class="form-label">Mật khẩu:</label>
+            <div class="input-group">
+                <span class="input-group-text">
+                    <i class="fas fa-lock"></i>
+                </span>
+                @Html.PasswordFor(m => m.matkhau, new { @class = "form-control", required = "required", placeholder = "Nhập mật khẩu" })
+            </div>
+        </div>
+        <div class="form-group mb-3">
+            <label class="form-label">Số điện thoại:</label>
+            <div class="input-group">
+                <span class="input-group-text">
+                    <i class="fas fa-phone"></i>
+                </span>
+                @Html.TextBoxFor(m => m.SoDienThoai, new { @class = "form-control", placeholder = "Nhập số điện thoại" })
+            </div>
+        </div>
+        <div class="form-group mb-4">
+            <label class="form-label">Địa chỉ:</label>
+            <div class="input-group">
+                <span class="input-group-text">
+                    <i class="fas fa-map-marker-alt"></i>
+                </span>
+                @Html.TextBoxFor(m => m.DiaChi, new { @class = "form-control", placeholder = "Nhập địa chỉ" })
+            </div>
+        </div>
+        <button type="submit" class="btn btn-primary w-100">
+            <i class="fas fa-user-plus me-2"></i>Đăng ký
+        </button>
+    }
+    @if (ViewBag.Error != null)
+    {
+        <div class="alert alert-danger mt-3">
+            <i class="fas fa-exclamation-circle me-2"></i>@ViewBag.Error
+        </div>
+    }
+    <div class="text-center mt-3">
+        <p>
+            Đã có tài khoản?
+            @Html.ActionLink("Đăng nhập", "Login", "Account", null, new { @class = "text-primary" })
+        </p>
+    </div>
+</div>

@@ -1,0 +1,26 @@
+﻿@model DA_WebBanHang.Models.SanPham
+
+@{
+    ViewBag.Title = "Chi tiết sản phẩm";
+}
+
+<div class="row mt-4">
+    <div class="col-md-6">
+        <img src="@Model.HinhAnh" class="img-fluid" alt="@Model.TenSanPham">
+    </div>
+    <div class="col-md-6">
+        <h2>@Model.TenSanPham</h2>
+        <p class="h4 text-danger">@Model.Gia.ToString("N0") VNĐ</p>
+        <p>@Model.MoTa</p>
+
+        @using (Html.BeginForm("AddToCart", "Home", FormMethod.Post))
+        {
+            @Html.Hidden("productId", Model.ID_SanPham)
+            <div class="form-group">
+                <label>Số lượng:</label>
+                <input type="number" name="quantity" class="form-control" value="1" min="1" max="@Model.SoLuongTon" />
+            </div>
+            <button type="submit" class="btn btn-primary mt-3">Thêm vào giỏ hàng</button>
+        }
+    </div>
+</div>

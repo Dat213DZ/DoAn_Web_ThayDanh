@@ -1,0 +1,96 @@
+﻿@{
+    ViewBag.Title = "Bài viết";
+    var posts = ViewBag.Posts as List<DA_WebBanHang.Models.BaiViet>;
+}
+
+<!-- Hero Section -->
+<div class="blog-hero">
+    <div class="container">
+        <h1 class="text-center mb-4">Bộ sưu tập thời trang</h1>
+        <p class="lead text-center">Khám phá những xu hướng mới nhất cùng Shop Modern</p>
+    </div>
+</div>
+
+<!-- Blog Grid Section -->
+<section class="blog-grid py-5">
+    <div class="container">
+        <div class="row">
+            @foreach (var post in posts)
+            {
+                <div class="col-md-6 mb-5">
+                    <article class="collection-card">
+                        <!-- Main Image -->
+                        <div class="collection-main-image">
+                            <img src="@post.HinhAnh1" alt="Thời trang" class="img-fluid">
+                        </div>
+
+                        <!-- Collection Content -->
+                        <div class="collection-content p-4">
+                            <p class="collection-description">@post.MoTa</p>
+
+                            <!-- Image Gallery -->
+                            <div class="collection-gallery mt-4">
+                                <div class="row g-3">
+                                    @if (!string.IsNullOrEmpty(post.HinhAnh2))
+                                    {
+                                        <div class="col-4">
+                                            <div class="gallery-item" onclick="openImageModal('@post.HinhAnh2')">
+                                                <img src="@post.HinhAnh2" alt="Thời trang" class="img-fluid">
+                                                <div class="gallery-overlay">
+                                                    <i class="fas fa-search-plus"></i>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    }
+                                    @if (!string.IsNullOrEmpty(post.HinhAnh3))
+                                    {
+                                        <div class="col-4">
+                                            <div class="gallery-item" onclick="openImageModal('@post.HinhAnh3')">
+                                                <img src="@post.HinhAnh3" alt="Thời trang" class="img-fluid">
+                                                <div class="gallery-overlay">
+                                                    <i class="fas fa-search-plus"></i>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    }
+                                    @if (!string.IsNullOrEmpty(post.HinhAnh4))
+                                    {
+                                        <div class="col-4">
+                                            <div class="gallery-item" onclick="openImageModal('@post.HinhAnh4')">
+                                                <img src="@post.HinhAnh4" alt="Thời trang" class="img-fluid">
+                                                <div class="gallery-overlay">
+                                                    <i class="fas fa-search-plus"></i>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    }
+                                </div>
+                            </div>
+                        </div>
+                    </article>
+                </div>
+            }
+        </div>
+    </div>
+</section>
+
+<!-- Image Modal -->
+<div class="modal fade" id="imageModal" tabindex="-1">
+    <div class="modal-dialog modal-lg modal-dialog-centered">
+        <div class="modal-content">
+            <div class="modal-body p-0">
+                <button type="button" class="btn-close position-absolute top-0 end-0 m-3" data-bs-dismiss="modal"></button>
+                <img src="" id="modalImage" class="img-fluid">
+            </div>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    <script>
+        function openImageModal(imageUrl) {
+            document.getElementById('modalImage').src = imageUrl;
+            new bootstrap.Modal(document.getElementById('imageModal')).show();
+        }
+    </script>
+}

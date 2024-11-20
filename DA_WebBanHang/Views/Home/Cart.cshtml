@@ -1,0 +1,44 @@
+﻿@model IEnumerable<DA_WebBanHang.Models.ChiTietDonHang>
+
+@{
+    ViewBag.Title = "Giỏ hàng";
+}
+
+<h2>Giỏ hàng</h2>
+
+@if (!Model.Any())
+{
+    <p>Giỏ hàng trống</p>
+}
+else
+{
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Sản phẩm</th>
+                <th>Số lượng</th>
+                <th>Đơn giá</th>
+                <th>Thành tiền</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td>@item.SanPham.TenSanPham</td>
+                    <td>@item.SoLuong</td>
+                    <td>@item.Gia.ToString("N0") VNĐ</td>
+                    <td>@((item.SoLuong * item.Gia).ToString("N0")) VNĐ</td>
+                </tr>
+            }
+        </tbody>
+        <tfoot>
+            <tr>
+                <td colspan="3" class="text-right"><strong>Tổng tiền:</strong></td>
+                <td>@Model.Sum(i => i.SoLuong * i.Gia).ToString("N0") VNĐ</td>
+            </tr>
+        </tfoot>
+    </table>
+
+    @Html.ActionLink("Thanh toán", "Checkout", null, new { @class = "btn btn-primary" })
+}
